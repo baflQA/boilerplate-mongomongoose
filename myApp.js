@@ -1,6 +1,13 @@
 require('dotenv').config();
 var mongoose = require('mongoose');
+const { Schema } = mongoose;
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const Person = new Schema({
+  name: String,
+  age: Number,
+  favoriteFoods: [String]
+})
 
 let Person;
 
