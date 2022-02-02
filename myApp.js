@@ -6,6 +6,10 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
+mongoose.on("message", (message) => {
+  console.log("Message: " + message);
+});
+
 const personSchema = new Schema({
   name: String,
   age: Number,
@@ -38,7 +42,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 const findPeopleByName = (personName, done) => {
   Person.find({ name: personName }, (err, result) => {
     if (err) return done(err);
-    console.log(result)
+    console.log(result);
     done(null, result);
   });
 };
@@ -46,7 +50,7 @@ const findPeopleByName = (personName, done) => {
 const findOneByFood = (food, done) => {
   Person.findOne({ favoriteFoods: food }, (err, result) => {
     if (err) return done(err);
-    console.log('Name: ' + result.name)
+    console.log("Name: " + result.name);
     done(null, result);
   });
 };
